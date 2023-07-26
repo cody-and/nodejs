@@ -1,8 +1,8 @@
-// TODO: Include packages needed for this application
+// packages required for the code to run
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-// TODO: Create a function to write README file
+// function to generate the license badges
 function renderLicenseBadge(license) {
   const licenseBadges = {
     'MIT': '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)',
@@ -12,7 +12,7 @@ function renderLicenseBadge(license) {
 
   return licenseBadges[license] || '';
 }
-
+// README skeleton with template literals with table of contents that takes you to each section by clicking 
 
 function generateREADME(answers) {
   return `
@@ -51,6 +51,7 @@ For any questions, you can contact me via:
 - Email: ${answers.email}
 - GitHub: [${answers.username}](https://github.com/${answers.username})
 `;
+}
 
 
 function writeToFile(file, data) {
@@ -62,7 +63,8 @@ function writeToFile(file, data) {
     }
   });
 }
-// TODO: Create a function to initialize app
+
+// questions for the user to create their readme
 function init() {
   inquirer.prompt([
     {
@@ -111,17 +113,14 @@ function init() {
       name: 'email',
       message: 'Enter your email address:',
     },
+    // uses the answers to create a readme file using the skeleton above as a baseline
   ]).then((answers) => {
-    // Generate the README content based on user input
     const readmeContent = generateREADME(answers);
 
-    // Define the file path and name for the README file
     const fileName = 'README.md';
 
-    // Call the writeToFile function to create the README file
     writeToFile(fileName, readmeContent);
   });
 }
 
-// Function call to initialize app
-init();}
+init();
